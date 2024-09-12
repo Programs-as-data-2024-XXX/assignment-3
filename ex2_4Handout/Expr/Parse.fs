@@ -6,8 +6,9 @@ module Parse
 open System
 open System.IO
 open System.Text
-open (*Microsoft.*)FSharp.Text
+open FSharp.Text
 open Absyn
+open Expr
 
 (* Plain parsing from a string, with poor error reporting *)
 
@@ -32,3 +33,9 @@ let fromFile (filename : string) =
                failwithf "%s in file %s near line %d, column %d\n" 
                   (exn.Message) filename (pos.Line+1) pos.Column
 
+(* 3.6 *)
+
+let e4 = "1 + 2 * 3"
+let compString (s: string) : sinstr list = scomp (fromString s) []
+
+let e4test = compString e4
